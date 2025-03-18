@@ -40,18 +40,17 @@ app.post("/send-order", async (req, res) => {
       `,
     };
 
-    try {
-      await transporter.sendMail(mailOptions);
-      console.log("✅ Order confirmation email sent successfully!");
-      res.status(200).json({ message: "Order email sent successfully." });
-    } catch (error) {
-      console.error("🚨 Error sending email:", error);
-      res.status(500).json({ message: "Failed to send order email." });
-    }
-});
+    await transporter.sendMail(mailOptions);
+    console.log("✅ Order confirmation email sent successfully!");
+    res.status(200).json({ message: "Order email sent successfully." });
+
+  } catch (error) {  // ✅ Added missing `catch` block
+    console.error("🚨 Error sending email:", error);
+    res.status(500).json({ message: "Failed to send order email." });
+  }
+}); // ✅ Added missing closing bracket here
 
 // Start server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-});  
-
+});
