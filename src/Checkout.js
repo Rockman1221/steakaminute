@@ -11,11 +11,12 @@ const Checkout = () => {
     e.preventDefault();
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (cart.length === 0) {
+    if (!cart || cart.length === 0) {
       alert("Your cart is empty. Please add items before placing an order.");
       return;
     }
 
+    // ✅ Ensure correct orderDetails format
     const orderDetails = cart.map((item) => ({
       name: item.name,
       quantity: item.quantity,
@@ -30,6 +31,8 @@ const Checkout = () => {
       orderDetails,
     };
 
+    console.log("📩 Sending Order Data:", orderData); // ✅ Debugging step
+
     try {
       const response = await fetch("http://localhost:5000/send-order", {
         method: "POST",
@@ -39,6 +42,8 @@ const Checkout = () => {
         body: JSON.stringify(orderData),
       });
 
+      const result = await response.json();
+
       if (response.ok) {
         alert("✅ Your order has been placed successfully! A confirmation email has been sent.");
         localStorage.removeItem("cart");
@@ -47,8 +52,7 @@ const Checkout = () => {
         setPhone("");
         setAddress("");
       } else {
-        const errorResult = await response.json();
-        alert(`❌ ${errorResult.message || "Failed to send order confirmation email. Please try again."}`);
+        alert(`❌ ${result.message || "Failed to send order confirmation email. Please try again."}`);
       }
     } catch (error) {
       console.error("🚨 Error submitting order:", error);
@@ -128,7 +132,7 @@ const Checkout = () => {
 
         <h4 className="mt-4">Order Summary:</h4>
         <ul className="list-group mb-3">
-          {(JSON.parse(localStorage.getItem("cart")) || []).map((item, index) => (
+          {cart.map((item, index) => (
             <li className="list-group-item d-flex justify-content-between" key={index}>
               <span>{item.quantity} × {item.name}</span>
               <span>${item.price.toFixed(2)} per lb</span>
