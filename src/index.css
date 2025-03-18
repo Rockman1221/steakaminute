@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 🔥 Fix Product Images & Card Layout */
+.product-image {
+  width: 100%; /* Full width */
+  height: 250px; /* Uniform height */
+  object-fit: cover; /* Ensures full steak image is visible without cutting */
+  border-radius: 10px; /* Smooth edges */
+  display: block;
+}
+
+/* 🔥 Make Cards Same Height */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* 🔥 Ensure card content stays aligned properly */
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+/* 🔥 Push Add to Cart Button to Bottom */
+.card-body .btn {
+  margin-top: auto;
+}
