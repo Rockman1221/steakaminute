@@ -1,0 +1,16 @@
+POST http://localhost:5000/send-order
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "araankhan437@gmail.com",
+  "phone": "123456789",
+  "address": "123 Test Street",
+  "orderDetails": [
+    {
+      "name": "Ribeye Steak",
+      "quantity": 2,
+      "price": 11.99
+    }
+  ]
+}
