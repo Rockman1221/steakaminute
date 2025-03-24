@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import FreshMeatHouseWebsite from "./FreshMeatHouseWebsite";
+import SteakaminuteWebsite from "./steakaminuteWebsite";
 import Checkout from "./Checkout";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Routes>
         {/* Home Page */}
-        <Route path="/" element={<FreshMeatHouseWebsite />} />
+        <Route path="/" element={<SteakaminuteWebsite />} />
         
         {/* Checkout Page */}
         <Route path="/checkout" element={<Checkout />} />

@@ -33,7 +33,7 @@ app.post("/send-order", async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: `${email}, ${process.env.EMAIL_USER}`, // Customer & Owner
-      subject: "✅ Fresh Meat House - Order Confirmation",
+      subject: "✅ Steak A Minute - Order Confirmation",
       html: `
         <h2>Order Confirmation</h2>
         <p>Dear <strong>${name}</strong>,</p>
@@ -47,7 +47,7 @@ app.post("/send-order", async (req, res) => {
         <p>We will weigh your order and confirm the final total before delivery.</p>
         <p>For any questions, please contact us.</p>
         <br>
-        <p>🔴 <strong>Fresh Meat House Team</strong></p>
+        <p>🔴 <strong>Steak A Minute Team</strong></p>
       `,
     };
 

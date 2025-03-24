@@ -3,7 +3,7 @@ import React, { useState, useMemo } from "react";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const FreshMeatHouseWebsite = () => {
+const steakaminuteWebsite = () => {
   const navigate = useNavigate();
 
   // Product List
@@ -122,10 +122,10 @@ const FreshMeatHouseWebsite = () => {
 
       {/* ✅ Footer */}
       <footer className="bg-danger text-white text-center py-3">
-        <p className="mb-0">&copy; 2025 Fresh Meat House. All rights reserved.</p>
+        <p className="mb-0">&copy; 2025 Steak A Minute. All rights reserved.</p>
       </footer>
     </div>
   );
 };
 
-export default FreshMeatHouseWebsite;
+export default steakaminuteWebsite;
