@@ -31,7 +31,9 @@ const Checkout = () => {
     };
 
     try {
-      const response = await fetch("/send-order", 
+      const response = await fetch("https://freshmeathouse.onrender.com/send-order", 
+ 
+ 
         {
         method: "POST",
         headers: {
