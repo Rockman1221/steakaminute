@@ -3,7 +3,7 @@ import React, { useState, useMemo } from "react";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const steakaminuteWebsite = () => {
+const SteakaminuteWebsite = () => {
   const navigate = useNavigate();
 
   // Product List
@@ -128,4 +128,4 @@ const steakaminuteWebsite = () => {
   );
 };
 
-export default steakaminuteWebsite;
+export default SteakaminuteWebsite;
