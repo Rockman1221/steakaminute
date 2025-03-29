@@ -156,6 +156,30 @@ const Checkout = () => {
 
         <div className="text-center">
           <Button variant="success" type="submit">
+            {/* ✅ Packaging Preference (Free vacuum-sealed option for customers) */}
+<Row className="my-4">
+  <Col md={12}>
+    <Form.Group>
+      <Form.Label className="fw-bold">
+        🥩 How would you like your meat packaged?
+      </Form.Label>
+      <Form.Check
+        type="radio"
+        id="vacuum-sealed"
+        name="packaging"
+        label="Vacuum-sealed (Recommended - Free!) 🆓✨"
+        defaultChecked
+      />
+      <Form.Check
+        type="radio"
+        id="simple-bag"
+        name="packaging"
+        label="Simple Bag (Best if cooking within 24 hrs)"
+      />
+    </Form.Group>
+  </Col>
+</Row>
+
             Place Order
           </Button>
         </div>
