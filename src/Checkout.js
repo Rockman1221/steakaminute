@@ -69,6 +69,10 @@ const Checkout = () => {
         <ul className="list-unstyled">
           <li><strong>Monday & Tuesday:</strong> For Wednesday & Thursday evening deliveries.</li>
           <li><strong>Thursday:</strong> For Friday, Saturday & Sunday evening deliveries.</li>
+          <Alert variant="warning" className="text-center">
+  📍 <strong>Note:</strong> Delivery is currently available <strong>only in Waterloo.</strong>
+</Alert>
+
         </ul>
       </Alert>
 
