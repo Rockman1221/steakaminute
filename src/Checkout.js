@@ -100,34 +100,49 @@ const Checkout = () => {
             </Form.Group>
           </Col>
         </Row>
-
         <Row className="mb-3">
-          <Col md={6}>
-            <Form.Group>
-              <Form.Label>Phone</Form.Label>
-              <Form.Control
-                type="tel"
-                placeholder="Enter your phone number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                required
-              />
-            </Form.Group>
-          </Col>
+  <Col md={6}>
+    <Form.Group>
+      <Form.Label>Phone</Form.Label>
+      <Form.Control
+        type="tel"
+        placeholder="Enter your phone number"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        required
+      />
+    </Form.Group>
+  </Col>
 
-          <Col md={6}>
-            <Form.Group>
-              <Form.Label>Address</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your delivery address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+  <Col md={6}>
+    <Form.Group>
+      <Form.Label>Address</Form.Label>
+      <Form.Control
+        type="text"
+        placeholder="Enter your delivery address"
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+        required
+      />
+    </Form.Group>
+  </Col>
+</Row>
+<Row className="mb-3">
+  <Col md={12}>
+    <Form.Group>
+      <Form.Label><strong>Payment Method</strong></Form.Label>
+      <Form.Select required>
+        <option value="">Select Payment Option</option>
+        <option value="interac">Interac e-Transfer (Auto-deposit enabled)</option>
+        <option value="cod">Cash on Delivery (COD)</option>
+      </Form.Select>
+      <Form.Text className="text-muted">
+        For Interac e-Transfer, payments will auto-deposit to araankhan437@gmail.com.
+      </Form.Text>
+    </Form.Group>
+  </Col>
+</Row>
+
 
         <h4 className="mt-4">Order Summary:</h4>
         <ul className="list-group mb-3">
