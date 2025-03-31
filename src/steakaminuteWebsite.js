@@ -10,7 +10,10 @@ const SteakaminuteWebsite = () => {
   const products = useMemo(() => [
     { id: 1, name: "Ribeye Steak", price: 11.99, img: "/images/ribeye-steak.jpg" },
     { id: 2, name: "T-Bone Steak", price: 11.99, img: "/images/tbone-steak.jpg" },
-    { id: 3, name: "Sirloin Steak", price: 11.99, img: "/images/sirloin-steak.jpg" }
+    { id: 3, name: "Sirloin Steak", price: 11.99, img: "/images/sirloin-steak.jpg" },
+    { id: 4, name: "Veal Steak", price: 8.99, img: "/images/veal-steak.jpg" },
+{ id: 5, name: "Veal Tomahawk Steak", price: 9.99, img: "/images/veal-tomahawk.jpg" },
+
   ], []);
 
   const [quantities, setQuantities] = useState({ 1: 1, 2: 1, 3: 1 });

@@ -171,7 +171,7 @@ const Checkout = () => {
         type="radio"
         id="vacuum-sealed"
         name="packaging"
-        label="Vacuum-sealed (Recommended - Free!) 🆓✨"
+        label="Vacuum-sealed ( Free!) 🆓✨"
         defaultChecked
       />
       <Form.Check
