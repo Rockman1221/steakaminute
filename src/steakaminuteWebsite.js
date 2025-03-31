@@ -16,7 +16,8 @@ const SteakaminuteWebsite = () => {
 
   ], []);
 
-  const [quantities, setQuantities] = useState({ 1: 1, 2: 1, 3: 1 });
+  const [quantities, setQuantities] = useState({});
+
 
   // Cart State
   const [cart, setCart] = useState([]);
