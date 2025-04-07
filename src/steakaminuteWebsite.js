@@ -51,8 +51,20 @@ const SteakaminuteWebsite = () => {
   return (
     <div>
       {/* ✅ Header Section */}
+      
       <header className="bg-danger text-white p-4 text-center">
-        <h1 className="fw-bold">Fresh Meat House</h1>
+  <h3 className="fw-bold">
+  Say goodbye to overpriced, stale meat—Steakaminute delivers fresh, hand-cut steaks for nearly half the market price!
+  </h3>
+  <p className="lead">
+    We solve your need for quality and convenience with free vacuum packing on every order and free delivery on your first order.
+  </p>
+  <nav>
+    <a href="#about" className="text-white mx-3">About</a>
+    <a href="#contact" className="text-white mx-3">Contact</a>
+  </nav>
+</header>
+
         <nav>
           <a href="#about" className="text-white mx-3">About</a>
           <a href="#contact" className="text-white mx-3">Contact</a>
