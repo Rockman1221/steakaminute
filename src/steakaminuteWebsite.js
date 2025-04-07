@@ -54,10 +54,13 @@ const SteakaminuteWebsite = () => {
       
       <header className="bg-danger text-white p-4 text-center">
   <h3 className="fw-bold">
-  Say goodbye to overpriced, stale meat—Steakaminute delivers fresh, hand-cut steaks for nearly half the market price!
+  Steakaminute delivers fresh, hand-cut steaks for nearly half the market price!
   </h3>
   <p className="lead">
-    We solve your need for quality and convenience with free vacuum packing on every order and free delivery on your first order.
+  <p className="lead">
+  We solve your need for quality and convenience with <strong>free vacuum packing on every order</strong> and <strong>free delivery on your first order</strong>.
+</p>
+
   </p>
   <nav>
     <a href="#about" className="text-white mx-3">About</a>
