@@ -62,7 +62,7 @@ app.post("/send-order", async (req, res) => {
     res.status(500).json({ message: "⚠️ Failed to send order confirmation email." });
   }
 });
-// ✅ Contact Message Endpoint
+// ✅ Contact Message Endpoint (sends via email)
 app.post("/contact", async (req, res) => {
   const { name, email, message } = req.body;
   console.log("📩 Received contact message:", req.body);
@@ -71,9 +71,34 @@ app.post("/contact", async (req, res) => {
     return res.status(400).json({ message: "⚠️ Missing required contact details." });
   }
 
-  // TODO: Process the contact message (e.g., store in a database or send an email)
-  // For now, simply respond with a success message
-  res.status(200).json({ message: "Thank you for contacting us! We will get back to you shortly." });
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER, 
+        pass: process.env.EMAIL_PASS, 
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER, // Replace with your email if you'd like to receive the message on a different address
+      subject: "New Contact Message from Steak A Minute",
+      html: `
+        <h2>New Contact Message</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong> ${message}</p>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("✅ Contact email sent successfully!");
+    res.status(200).json({ message: "Thank you for contacting us! Your message has been sent." });
+  } catch (error) {
+    console.error("🚨 Error sending contact email:", error);
+    res.status(500).json({ message: "⚠️ Failed to send contact email." });
+  }
 });
 
 // ✅ Start Server
