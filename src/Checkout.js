@@ -76,8 +76,8 @@ const Checkout = () => {
   📍 <strong>Note:</strong> Delivery is currently available <strong>only in Waterloo.</strong>
 </Alert>
 
-        </ul>
-      </Alert>
+        
+      
 
       <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
