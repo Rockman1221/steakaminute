@@ -64,12 +64,15 @@ const Checkout = () => {
       <h2 className="text-center mb-4">Checkout</h2>
 
       <Alert variant="info" className="text-center">
-        <strong>Delivery Notice:</strong> We receive fresh meat every Wednesday and Friday.<br />
-        Please place your orders:<br />
-        <ul className="list-unstyled">
-          <li><strong>Monday & Tuesday:</strong> For Wednesday & Thursday evening deliveries.</li>
-          <li><strong>Thursday:</strong> For Friday, Saturday & Sunday evening deliveries.</li>
-          <Alert variant="warning" className="text-center">
+  <strong>Delivery Made Simple</strong>
+  <br />
+  • Order by Tuesday for Wed/Thu delivery.
+  <br />
+  • Order by Thursday for Fri–Sun delivery.
+  <br />
+  Fresh stock arrives every Wed & Fri.
+
+
   📍 <strong>Note:</strong> Delivery is currently available <strong>only in Waterloo.</strong>
 </Alert>
 
