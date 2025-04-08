@@ -64,13 +64,13 @@ const Checkout = () => {
       <h2 className="text-center mb-4">Checkout</h2>
 
       <Alert variant="info" className="text-center">
-  <strong>Delivery Made Simple</strong>
+
   <br />
   • Order by Tuesday for Wed/Thu delivery.
   <br />
   • Order by Thursday for Fri–Sun delivery.
   <br />
-  Fresh stock arrives every Wed & Fri.
+    FRESH MEAT ARRIVES EVERY WED & FRI.
 
 
   📍 <strong>Note:</strong> Delivery is currently available <strong>only in Waterloo.</strong>
