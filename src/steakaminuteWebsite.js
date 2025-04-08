@@ -1,3 +1,4 @@
+import ContactSection from './ContactSection'; // Adjust the relative path if needed.
 import "./App.css"; 
 import React, { useState, useMemo } from "react";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
@@ -129,15 +130,8 @@ const SteakaminuteWebsite = () => {
         </Container>
       </section>
 
-      {/* ✅ Contact Section */}
-      <section id="contact" className="py-5 bg-white text-center">
-        <Container>
-          <h2 className="fw-bold">Contact Us</h2>
-          <p className="text-muted">
-            Have questions? Contact us for more details about our products or delivery services.
-          </p>
-        </Container>
-      </section>
+      <ContactSection />
+
 
       {/* ✅ Footer */}
       <footer className="bg-danger text-white text-center py-3">
