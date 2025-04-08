@@ -120,8 +120,11 @@ const SteakaminuteWebsite = () => {
         </Container>
       </section>
 
-      {/* ✅ About Section */}
-      <section id="about" className="py-5 bg-light text-center">
+      <ContactSection />
+
+      
+  {/* ✅ About Section */}
+  <section id="about" className="py-5 bg-light text-center">
         <Container>
           <h2 className="fw-bold">About Us</h2>
           <p className="text-muted">
@@ -129,9 +132,6 @@ const SteakaminuteWebsite = () => {
           </p>
         </Container>
       </section>
-
-      <ContactSection />
-
 
       {/* ✅ Footer */}
       <footer className="bg-danger text-white text-center py-3">

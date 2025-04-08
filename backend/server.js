@@ -62,6 +62,19 @@ app.post("/send-order", async (req, res) => {
     res.status(500).json({ message: "⚠️ Failed to send order confirmation email." });
   }
 });
+// ✅ Contact Message Endpoint
+app.post("/contact", async (req, res) => {
+  const { name, email, message } = req.body;
+  console.log("📩 Received contact message:", req.body);
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ message: "⚠️ Missing required contact details." });
+  }
+
+  // TODO: Process the contact message (e.g., store in a database or send an email)
+  // For now, simply respond with a success message
+  res.status(200).json({ message: "Thank you for contacting us! We will get back to you shortly." });
+});
 
 // ✅ Start Server
 app.listen(PORT, () => {
