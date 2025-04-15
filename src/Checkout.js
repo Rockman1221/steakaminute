@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { Container, Form, Button, Row, Col, Alert } from "react-bootstrap";
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -31,17 +33,14 @@ const Checkout = () => {
     };
 
     try {
-      const response = await fetch("https://freshmeathouse.onrender.com/send-order", 
- 
- 
-        {
+      const response = await fetch("https://freshmeathouse.onrender.com/send-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(orderData),
       });
-
+    
       if (response.ok) {
         alert("✅ Your order has been placed successfully! A confirmation email has been sent.");
         localStorage.removeItem("cart");
@@ -49,6 +48,9 @@ const Checkout = () => {
         setEmail("");
         setPhone("");
         setAddress("");
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       } else {
         const errorResult = await response.json();
         alert(`❌ ${errorResult.message || "Failed to send order confirmation email. Please try again."}`);
@@ -57,7 +59,8 @@ const Checkout = () => {
       console.error("🚨 Error submitting order:", error);
       alert("⚠️ Something went wrong while placing your order. Please check your information and try again.");
     }
-  };
+    
+  }; 
 
   return (
     <Container className="py-5">
@@ -122,16 +125,18 @@ const Checkout = () => {
   </Col>
 
   <Col md={6}>
-    <Form.Group>
-      <Form.Label>Address</Form.Label>
-      <Form.Control
-        type="text"
-        placeholder="Enter your delivery address"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-        required
-      />
-    </Form.Group>
+    
+  <Form.Group>
+  <Form.Label>Address</Form.Label>
+  <Form.Control
+    type="text"
+    placeholder="Enter your delivery address"
+    value={address}
+    onChange={(e) => setAddress(e.target.value)}
+    required
+  />
+</Form.Group>
+
   </Col>
 </Row>
 <Row className="mb-3">
