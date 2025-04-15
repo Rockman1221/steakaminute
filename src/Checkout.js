@@ -49,8 +49,9 @@ const Checkout = () => {
         setPhone("");
         setAddress("");
         setTimeout(() => {
-          navigate("/");
-        }, 2000);
+          navigate("/", { replace: true });
+        }, 300);
+        
       } else {
         const errorResult = await response.json();
         alert(`❌ ${errorResult.message || "Failed to send order confirmation email. Please try again."}`);
