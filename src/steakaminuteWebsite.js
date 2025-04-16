@@ -23,10 +23,17 @@ const SteakaminuteWebsite = () => {
   // Cart State
   const [cart, setCart] = useState([]);
 
-  // Handle Quantity Change
   const handleQuantityChange = (id, value) => {
-    setQuantities(prev => ({ ...prev, [id]: parseInt(value) || 1 }));
+    // Allow blank input
+    if (value === "") {
+      setQuantities((prev) => ({ ...prev, [id]: "" }));
+    } else {
+      // Convert to number and update (allowing zero)
+      const num = parseInt(value, 10);
+      setQuantities((prev) => ({ ...prev, [id]: isNaN(num) ? "" : num }));
+    }
   };
+  
 
   // ✅ Corrected Add to Cart Function
   const handleAddToCart = () => {
