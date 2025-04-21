@@ -8,11 +8,12 @@ const Checkout = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false); // ✅ added loading state
+  const [packaging, setPackaging] = useState("vacuum-sealed"); // ✅ new state
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true); // ✅ start loading
+    setIsSubmitting(true);
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     if (cart.length === 0) {
@@ -33,6 +34,7 @@ const Checkout = () => {
       phone,
       address,
       orderDetails,
+      packaging, // ✅ include in order data
     };
 
     try {
@@ -51,19 +53,20 @@ const Checkout = () => {
         setEmail("");
         setPhone("");
         setAddress("");
+        setPackaging("vacuum-sealed");
         setTimeout(() => {
           navigate("/", { replace: true });
-          setIsSubmitting(false); // ✅ stop loading
+          setIsSubmitting(false);
         }, 300);
       } else {
         const errorResult = await response.json();
         alert(`❌ ${errorResult.message || "Failed to send order confirmation email. Please try again."}`);
-        setIsSubmitting(false); // ✅ stop loading
+        setIsSubmitting(false);
       }
     } catch (error) {
       console.error("🚨 Error submitting order:", error);
       alert("⚠️ Something went wrong while placing your order. Please check your information and try again.");
-      setIsSubmitting(false); // ✅ stop loading
+      setIsSubmitting(false);
     }
   };
 
@@ -77,7 +80,6 @@ const Checkout = () => {
         <br />
         • Order by Thursday for Fri–Sun delivery.
         <br />
-        FRESH MEAT ARRIVES EVERY WED & FRI.
         📍 <strong>Note:</strong> Delivery is currently available <strong>only in Waterloo.</strong>
       </Alert>
 
@@ -164,41 +166,58 @@ const Checkout = () => {
           ))}
         </ul>
 
-        {/* ✅ PACKAGING OPTIONS (unchanged but outside the button) */}
-        <Row className="my-4">
-          <Col md={12}>
-            <Form.Group>
-              <Form.Label className="fw-bold">
+        {/* ✅ Updated Packaging Section */}
+        <div className="d-flex justify-content-center my-4">
+          <div
+            style={{
+              backgroundColor: "#f8f9fa",
+              borderRadius: "10px",
+              padding: "20px",
+              maxWidth: "500px",
+              width: "100%",
+              boxShadow: "0 0 10px rgba(0,0,0,0.1)"
+            }}
+          >
+            <Form.Group className="text-center">
+              <Form.Label className="fw-bold fs-5 text-danger">
                 🥩 How would you like your meat packaged?
               </Form.Label>
-              <Form.Check
-                type="radio"
-                id="vacuum-sealed"
-                name="packaging"
-                label="Vacuum-sealed ( Free!) 🆓✨"
-                defaultChecked
-              />
-              <Form.Check
-                type="radio"
-                id="simple-bag"
-                name="packaging"
-                label="Simple Bag (Best if cooking within 24 hrs)"
-              />
+              <div className="d-flex flex-column align-items-start mt-3">
+                <Form.Check
+                  type="radio"
+                  id="vacuum-sealed"
+                  name="packaging"
+                  label="Vacuum-sealed ( Free!) 🆓✨"
+                  value="vacuum-sealed"
+                  checked={packaging === "vacuum-sealed"}
+                  onChange={(e) => setPackaging(e.target.value)}
+                />
+                <Form.Check
+                  type="radio"
+                  id="simple-bag"
+                  name="packaging"
+                  label="Simple Bag (Best if cooking within 24 hrs)"
+                  value="simple-bag"
+                  checked={packaging === "simple-bag"}
+                  onChange={(e) => setPackaging(e.target.value)}
+                  className="mt-2"
+                />
+              </div>
             </Form.Group>
-          </Col>
-        </Row>
+          </div>
+        </div>
 
-        {/* ✅ FINAL BOLD BUTTON AT THE BOTTOM */}
+        {/* ✅ Smaller Centered Place Order Button */}
         <div className="text-center mt-4">
           <Button
             variant="success"
             type="submit"
             disabled={isSubmitting}
             style={{
-              fontWeight: 'bold',
-              width: '100%',
-              fontSize: '1.2rem',
-              padding: '12px 0'
+              fontWeight: "bold",
+              minWidth: "200px",
+              fontSize: "1.1rem",
+              padding: "10px 24px"
             }}
           >
             {isSubmitting ? "Placing Order..." : "Place Order"}

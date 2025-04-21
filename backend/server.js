@@ -11,7 +11,7 @@ app.use(cors());
 
 // ✅ Order Processing API
 app.post("/send-order", async (req, res) => {
-  const { name, email, phone, address, orderDetails } = req.body;
+  const { name, email, phone, address, orderDetails, packaging } = req.body; // ✅ added packaging
 
   // ✅ Debugging: Log received order
   console.log("📩 Received order request:", req.body);
@@ -24,8 +24,8 @@ app.post("/send-order", async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER, 
-        pass: process.env.EMAIL_PASS, 
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
@@ -38,14 +38,20 @@ app.post("/send-order", async (req, res) => {
         <h2>Order Confirmation</h2>
         <p>Dear <strong>${name}</strong>,</p>
         <p>Thank you for your order! Here are your details:</p>
+
         <h3>🛒 Order Summary:</h3>
         <ul>
           ${orderDetails.map(item => `<li>${item.quantity} x ${item.name} - $${item.price.toFixed(2)} per lb</li>`).join("")}
         </ul>
+
+        <p><strong>📦 Packaging Preference:</strong> ${packaging === "simple-bag" ? "Simple Bag" : "Vacuum-sealed"}</p>
+
         <p><strong>📍 Address:</strong> ${address}</p>
         <p><strong>📞 Contact:</strong> ${phone}</p>
+
         <p>We will weigh your order and confirm the final total before delivery.</p>
         <p>For any questions, please contact us.</p>
+
         <br>
         <p>🔴 <strong>Steak A Minute Team</strong></p>
       `,
@@ -62,6 +68,7 @@ app.post("/send-order", async (req, res) => {
     res.status(500).json({ message: "⚠️ Failed to send order confirmation email." });
   }
 });
+
 // ✅ Contact Message Endpoint (sends via email)
 app.post("/contact", async (req, res) => {
   const { name, email, message } = req.body;
@@ -75,14 +82,14 @@ app.post("/contact", async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER, 
-        pass: process.env.EMAIL_PASS, 
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER, // Replace with your email if you'd like to receive the message on a different address
+      to: process.env.EMAIL_USER,
       subject: "New Contact Message from Steak A Minute",
       html: `
         <h2>New Contact Message</h2>
