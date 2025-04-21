@@ -11,65 +11,64 @@ app.use(cors());
 
 // ✅ Order Processing API
 app.post("/send-order", async (req, res) => {
-  const { name, email, phone, address, orderDetails, packaging } = req.body; // ✅ added packaging
+  const { name, email, phone, address, orderDetails, packaging } = req.body;
 
-  // ✅ Debugging: Log received order
   console.log("📩 Received order request:", req.body);
 
   if (!name || !email || !phone || !address || !orderDetails || orderDetails.length === 0) {
     return res.status(400).json({ message: "⚠️ Missing required order details." });
   }
 
-  try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+  // ✅ Respond immediately so UI doesn't wait
+  res.status(200).json({ message: "Order received. Confirmation email will be sent shortly." });
 
-    // ✅ Email Content
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: `${email}, ${process.env.EMAIL_USER}`, // Customer & Owner
-      subject: "✅ Steak A Minute - Order Confirmation",
-      html: `
-        <h2>Order Confirmation</h2>
-        <p>Dear <strong>${name}</strong>,</p>
-        <p>Thank you for your order! Here are your details:</p>
+  // ✅ Send email in the background after a short delay
+  setTimeout(async () => {
+    try {
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
 
-        <h3>🛒 Order Summary:</h3>
-        <ul>
-          ${orderDetails.map(item => `<li>${item.quantity} x ${item.name} - $${item.price.toFixed(2)} per lb</li>`).join("")}
-        </ul>
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: `${email}, ${process.env.EMAIL_USER}`,
+        subject: "✅ Steak A Minute - Order Confirmation",
+        html: `
+          <h2>Order Confirmation</h2>
+          <p>Dear <strong>${name}</strong>,</p>
+          <p>Thank you for your order! Here are your details:</p>
 
-        <p><strong>📦 Packaging Preference:</strong> ${packaging === "simple-bag" ? "Simple Bag" : "Vacuum-sealed"}</p>
+          <h3>🛒 Order Summary:</h3>
+          <ul>
+            ${orderDetails.map(item => `<li>${item.quantity} x ${item.name} - $${item.price.toFixed(2)} per lb</li>`).join("")}
+          </ul>
 
-        <p><strong>📍 Address:</strong> ${address}</p>
-        <p><strong>📞 Contact:</strong> ${phone}</p>
+          <p><strong>📦 Packaging Preference:</strong> ${packaging === "simple-bag" ? "Simple Bag" : "Vacuum-sealed"}</p>
 
-        <p>We will weigh your order and confirm the final total before delivery.</p>
-        <p>For any questions, please contact us.</p>
+          <p><strong>📍 Address:</strong> ${address}</p>
+          <p><strong>📞 Contact:</strong> ${phone}</p>
 
-        <br>
-        <p>🔴 <strong>Steak A Minute Team</strong></p>
-      `,
-    };
+          <p>We will weigh your order and confirm the final total before delivery.</p>
+          <p>For any questions, please contact us.</p>
 
-    // ✅ Send Email
-    await transporter.sendMail(mailOptions);
-    console.log("✅ Order confirmation email sent successfully!");
+          <br>
+          <p>🔴 <strong>Steak A Minute Team</strong></p>
+        `,
+      };
 
-    res.status(200).json({ message: "Order email sent successfully." });
-
-  } catch (error) {
-    console.error("🚨 Error sending email:", error);
-    res.status(500).json({ message: "⚠️ Failed to send order confirmation email." });
-  }
+      await transporter.sendMail(mailOptions);
+      console.log("✅ Order confirmation email sent successfully!");
+    } catch (error) {
+      console.error("🚨 Error sending email:", error);
+    }
+  }, 100);
 });
 
-// ✅ Contact Message Endpoint (sends via email)
+// ✅ Contact Message Endpoint (unchanged)
 app.post("/contact", async (req, res) => {
   const { name, email, message } = req.body;
   console.log("📩 Received contact message:", req.body);
