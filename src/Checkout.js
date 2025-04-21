@@ -8,13 +8,16 @@ const Checkout = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); // ✅ added loading state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true); // ✅ start loading
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     if (cart.length === 0) {
       alert("Your cart is empty. Please add items before placing an order.");
+      setIsSubmitting(false);
       return;
     }
 
@@ -40,7 +43,7 @@ const Checkout = () => {
         },
         body: JSON.stringify(orderData),
       });
-    
+
       if (response.ok) {
         alert("✅ Your order has been placed successfully! A confirmation email has been sent.");
         localStorage.removeItem("cart");
@@ -50,38 +53,33 @@ const Checkout = () => {
         setAddress("");
         setTimeout(() => {
           navigate("/", { replace: true });
+          setIsSubmitting(false); // ✅ stop loading
         }, 300);
-        
       } else {
         const errorResult = await response.json();
         alert(`❌ ${errorResult.message || "Failed to send order confirmation email. Please try again."}`);
+        setIsSubmitting(false); // ✅ stop loading
       }
     } catch (error) {
       console.error("🚨 Error submitting order:", error);
       alert("⚠️ Something went wrong while placing your order. Please check your information and try again.");
+      setIsSubmitting(false); // ✅ stop loading
     }
-    
-  }; 
+  };
 
   return (
     <Container className="py-5">
       <h2 className="text-center mb-4">Checkout</h2>
 
       <Alert variant="info" className="text-center">
-
-  <br />
-  • Order by Tuesday for Wed/Thu delivery.
-  <br />
-  • Order by Thursday for Fri–Sun delivery.
-  <br />
-    FRESH MEAT ARRIVES EVERY WED & FRI.
-
-
-  📍 <strong>Note:</strong> Delivery is currently available <strong>only in Waterloo.</strong>
-</Alert>
-
-        
-      
+        <br />
+        • Order by Tuesday for Wed/Thu delivery.
+        <br />
+        • Order by Thursday for Fri–Sun delivery.
+        <br />
+        FRESH MEAT ARRIVES EVERY WED & FRI.
+        📍 <strong>Note:</strong> Delivery is currently available <strong>only in Waterloo.</strong>
+      </Alert>
 
       <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
@@ -111,51 +109,50 @@ const Checkout = () => {
             </Form.Group>
           </Col>
         </Row>
+
         <Row className="mb-3">
-  <Col md={6}>
-    <Form.Group>
-      <Form.Label>Phone</Form.Label>
-      <Form.Control
-        type="tel"
-        placeholder="Enter your phone number"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        required
-      />
-    </Form.Group>
-  </Col>
+          <Col md={6}>
+            <Form.Group>
+              <Form.Label>Phone</Form.Label>
+              <Form.Control
+                type="tel"
+                placeholder="Enter your phone number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Col>
 
-  <Col md={6}>
-    
-  <Form.Group>
-  <Form.Label>Address</Form.Label>
-  <Form.Control
-    type="text"
-    placeholder="Enter your delivery address"
-    value={address}
-    onChange={(e) => setAddress(e.target.value)}
-    required
-  />
-</Form.Group>
+          <Col md={6}>
+            <Form.Group>
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter your delivery address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Col>
+        </Row>
 
-  </Col>
-</Row>
-<Row className="mb-3">
-  <Col md={12}>
-    <Form.Group>
-      <Form.Label><strong>Payment Method</strong></Form.Label>
-      <Form.Select required>
-        <option value="">Select Payment Option</option>
-        <option value="interac">Interac e-Transfer (Auto-deposit enabled)</option>
-        <option value="cod">Cash on Delivery (COD)</option>
-      </Form.Select>
-      <Form.Text className="text-muted">
-        For Interac e-Transfer, payments will auto-deposit to araankhan437@gmail.com.
-      </Form.Text>
-    </Form.Group>
-  </Col>
-</Row>
-
+        <Row className="mb-3">
+          <Col md={12}>
+            <Form.Group>
+              <Form.Label><strong>Payment Method</strong></Form.Label>
+              <Form.Select required>
+                <option value="">Select Payment Option</option>
+                <option value="interac">Interac e-Transfer (Auto-deposit enabled)</option>
+                <option value="cod">Cash on Delivery (COD)</option>
+              </Form.Select>
+              <Form.Text className="text-muted">
+                For Interac e-Transfer, payments will auto-deposit to araankhan437@gmail.com.
+              </Form.Text>
+            </Form.Group>
+          </Col>
+        </Row>
 
         <h4 className="mt-4">Order Summary:</h4>
         <ul className="list-group mb-3">
@@ -167,33 +164,44 @@ const Checkout = () => {
           ))}
         </ul>
 
-        <div className="text-center">
-          <Button variant="success" type="submit">
-            {/* ✅ Packaging Preference (Free vacuum-sealed option for customers) */}
-<Row className="my-4">
-  <Col md={12}>
-    <Form.Group>
-      <Form.Label className="fw-bold">
-        🥩 How would you like your meat packaged?
-      </Form.Label>
-      <Form.Check
-        type="radio"
-        id="vacuum-sealed"
-        name="packaging"
-        label="Vacuum-sealed ( Free!) 🆓✨"
-        defaultChecked
-      />
-      <Form.Check
-        type="radio"
-        id="simple-bag"
-        name="packaging"
-        label="Simple Bag (Best if cooking within 24 hrs)"
-      />
-    </Form.Group>
-  </Col>
-</Row>
+        {/* ✅ PACKAGING OPTIONS (unchanged but outside the button) */}
+        <Row className="my-4">
+          <Col md={12}>
+            <Form.Group>
+              <Form.Label className="fw-bold">
+                🥩 How would you like your meat packaged?
+              </Form.Label>
+              <Form.Check
+                type="radio"
+                id="vacuum-sealed"
+                name="packaging"
+                label="Vacuum-sealed ( Free!) 🆓✨"
+                defaultChecked
+              />
+              <Form.Check
+                type="radio"
+                id="simple-bag"
+                name="packaging"
+                label="Simple Bag (Best if cooking within 24 hrs)"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
 
-            Place Order
+        {/* ✅ FINAL BOLD BUTTON AT THE BOTTOM */}
+        <div className="text-center mt-4">
+          <Button
+            variant="success"
+            type="submit"
+            disabled={isSubmitting}
+            style={{
+              fontWeight: 'bold',
+              width: '100%',
+              fontSize: '1.2rem',
+              padding: '12px 0'
+            }}
+          >
+            {isSubmitting ? "Placing Order..." : "Place Order"}
           </Button>
         </div>
       </Form>
