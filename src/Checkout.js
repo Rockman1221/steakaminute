@@ -150,7 +150,7 @@ const Checkout = () => {
                 <option value="cod">Cash on Delivery (COD)</option>
               </Form.Select>
               <Form.Text className="text-muted">
-                For Interac e-Transfer, payments will auto-deposit to araankhan437@gmail.com.
+                For Interac e-Transfer, payments will auto-deposit to steakaminute@gmail.com.
               </Form.Text>
             </Form.Group>
           </Col>
