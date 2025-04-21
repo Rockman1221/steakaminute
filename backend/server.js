@@ -1,14 +1,3 @@
-require("dotenv").config();
-const express = require("express");
-const nodemailer = require("nodemailer");
-const cors = require("cors");
-
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-app.use(express.json());
-app.use(cors());
-
 // ✅ Order Processing API
 app.post("/send-order", async (req, res) => {
   const { name, email, phone, address, orderDetails, packaging } = req.body;
@@ -23,91 +12,72 @@ app.post("/send-order", async (req, res) => {
   res.status(200).json({ message: "Order received. Confirmation email will be sent shortly." });
 
   // ✅ Send email in the background after a short delay
-  setTimeout(async () => {
-    try {
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-      });
+  setTimeout(() => {
+    (async () => {
+      try {
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+          },
+        });
 
-      const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: `${email}, ${process.env.EMAIL_USER}`,
-        subject: "✅ Steak A Minute - Order Confirmation",
-        html: `
-          <h2>Order Confirmation</h2>
-          <p>Dear <strong>${name}</strong>,</p>
-          <p>Thank you for your order! Here are your details:</p>
+        const mailOptions = {
+          from: process.env.EMAIL_USER,
+          to: `${email}, ${process.env.EMAIL_USER}`,
+          subject: "Your Steak A Minute order has been received",
+          text: `Hi ${name},
 
-          <h3>🛒 Order Summary:</h3>
-          <ul>
-            ${orderDetails.map(item => `<li>${item.quantity} x ${item.name} - $${item.price.toFixed(2)} per lb</li>`).join("")}
-          </ul>
+Thanks for your order with Steak A Minute!
 
-          <p><strong>📦 Packaging Preference:</strong> ${packaging === "simple-bag" ? "Simple Bag" : "Vacuum-sealed"}</p>
+We’ve received your order and will weigh the items shortly. Once weighed, we’ll confirm your final price before delivery.
 
-          <p><strong>📍 Address:</strong> ${address}</p>
-          <p><strong>📞 Contact:</strong> ${phone}</p>
+Order Summary:
+${orderDetails.map(item => `${item.quantity} x ${item.name} - $${item.price.toFixed(2)} per lb`).join("\n")}
 
-          <p>We will weigh your order and confirm the final total before delivery.</p>
-          <p>For any questions, please contact us.</p>
+Packaging: ${packaging}
+Address: ${address}
+Phone: ${phone}
 
-          <br>
-          <p>🔴 <strong>Steak A Minute Team</strong></p>
-        `,
-      };
+Reply to this email if you have any questions.
 
-      await transporter.sendMail(mailOptions);
-      console.log("✅ Order confirmation email sent successfully!");
-    } catch (error) {
-      console.error("🚨 Error sending email:", error);
-    }
+– The Steak A Minute Team`,
+
+          html: `
+            <p>Hello ${name},</p>
+
+            <p>Thank you for your order with <strong>Steak A Minute</strong>!</p>
+
+            <p>We’ve received your order and will weigh the items shortly. Once weighed, we’ll confirm your final price before delivery.</p>
+
+            <p><strong>Here’s what you ordered:</strong></p>
+            <ul>
+              ${orderDetails.map(item => `<li>${item.quantity} × ${item.name} — $${item.price.toFixed(2)} per lb</li>`).join("")}
+            </ul>
+
+            <p><strong>Packaging preference:</strong> ${packaging === "simple-bag" ? "Simple Bag" : "Vacuum-sealed"}</p>
+
+            <p><strong>Delivery address:</strong> ${address}</p>
+            <p><strong>Phone number:</strong> ${phone}</p>
+
+            <p>If you have any questions or updates, feel free to reply to this email directly.</p>
+
+            <p>Thanks again,</p>
+            <p>– The Steak A Minute Team</p>
+
+            <hr>
+            <p style="font-size: 0.9em; color: #555;">
+              Tip: Add this email (steakaminute@gmail.com) to your contacts so future updates land in your inbox.
+            </p>
+          `,
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log("✅ Order confirmation email sent successfully!");
+      } catch (error) {
+        console.error("🚨 Error sending email:", error);
+      }
+    })();
   }, 100);
-});
-
-// ✅ Contact Message Endpoint (unchanged)
-app.post("/contact", async (req, res) => {
-  const { name, email, message } = req.body;
-  console.log("📩 Received contact message:", req.body);
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ message: "⚠️ Missing required contact details." });
-  }
-
-  try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: "New Contact Message from Steak A Minute",
-      html: `
-        <h2>New Contact Message</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong> ${message}</p>
-      `,
-    };
-
-    await transporter.sendMail(mailOptions);
-    console.log("✅ Contact email sent successfully!");
-    res.status(200).json({ message: "Thank you for contacting us! Your message has been sent." });
-  } catch (error) {
-    console.error("🚨 Error sending contact email:", error);
-    res.status(500).json({ message: "⚠️ Failed to send contact email." });
-  }
-});
-
-// ✅ Start Server
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
 });
