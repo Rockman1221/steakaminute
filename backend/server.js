@@ -106,9 +106,9 @@ app.post("/contact", async (req, res) => {
 
   try {
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT),
-      secure: parseInt(process.env.SMTP_PORT) === 465, // auto-select secure
+      host: process.env.SMTP_HOST,                           // ✅ uses your .env
+      port: parseInt(process.env.SMTP_PORT),                 // ✅ dynamic
+      secure: parseInt(process.env.SMTP_PORT) === 465,       // ✅ correct for TLS/SSL
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
