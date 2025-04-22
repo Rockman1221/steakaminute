@@ -27,7 +27,9 @@ app.post("/send-order", async (req, res) => {
     (async () => {
       try {
         const transporter = nodemailer.createTransport({
-          service: "gmail",
+          host: "smtp.zoho.ca",
+          port: 465,
+          secure: true,
           auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS,
@@ -79,7 +81,7 @@ Reply to this email if you have any questions.
 
             <hr>
             <p style="font-size: 0.9em; color: #555;">
-              Tip: Add this email (steakaminute@gmail.com) to your contacts so future updates land in your inbox.
+              Tip: Add this email (orders@steakaminute.com) to your contacts so future updates land in your inbox.
             </p>
           `,
         };
@@ -104,7 +106,9 @@ app.post("/contact", async (req, res) => {
 
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.zoho.ca",
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
