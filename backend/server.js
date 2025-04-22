@@ -27,14 +27,15 @@ app.post("/send-order", async (req, res) => {
     (async () => {
       try {
         const transporter = nodemailer.createTransport({
-          host: "smtp.zoho.ca",
-          port: 465,
-          secure: true,
+          host: process.env.SMTP_HOST,
+          port: parseInt(process.env.SMTP_PORT),
+          secure: parseInt(process.env.SMTP_PORT) === 465,
           auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS,
           },
         });
+        
 
         const mailOptions = {
           from: process.env.EMAIL_USER,
