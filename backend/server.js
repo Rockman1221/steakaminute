@@ -28,14 +28,17 @@ app.post("/send-order", async (req, res) => {
       try {
         const transporter = nodemailer.createTransport({
           host: process.env.SMTP_HOST,
-          port: parseInt(process.env.SMTP_PORT),
-          secure: parseInt(process.env.SMTP_PORT) === 465,
+          port: parseInt(process.env.SMTP_PORT, 10),
+          secure: parseInt(process.env.SMTP_PORT, 10) === 465,        // SSL on port 465
+          requireTLS: parseInt(process.env.SMTP_PORT, 10) === 587,     // STARTTLS on port 587
           auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS,
           },
+          tls: {
+            rejectUnauthorized: false
+          }
         });
-        
 
         const mailOptions = {
           from: process.env.EMAIL_USER,
@@ -57,15 +60,13 @@ Phone: ${phone}
 Reply to this email if you have any questions.
 
 – The Steak A Minute Team`,
-
           html: `
             <p>Hello ${name},</p>
 
             <p>Thank you for your order with <strong>Steak A Minute</strong>!</p>
-
             <p>We’ve received your order and will weigh the items shortly. Once weighed, we’ll confirm your final price before delivery.</p>
 
-            <p><strong>Here’s what you ordered:</strong></p>
+            <h3>Here’s what you ordered:</h3>
             <ul>
               ${orderDetails.map(item => `<li>${item.quantity} × ${item.name} — $${item.price.toFixed(2)} per lb</li>`).join("")}
             </ul>
@@ -75,14 +76,14 @@ Reply to this email if you have any questions.
             <p><strong>Delivery address:</strong> ${address}</p>
             <p><strong>Phone number:</strong> ${phone}</p>
 
-            <p>If you have any questions or updates, feel free to reply to this email directly.</p>
+            <p>If you have any questions or updates, feel free to reply directly to this email.</p>
 
             <p>Thanks again,</p>
             <p>– The Steak A Minute Team</p>
 
             <hr>
-            <p style="font-size: 0.9em; color: #555;">
-              Tip: Add this email (orders@steakaminute.com) to your contacts so future updates land in your inbox.
+            <p style="font-size:0.9em;color:#555;">
+              Tip: Add this email (${process.env.EMAIL_USER}) to your contacts so future updates land in your inbox.
             </p>
           `,
         };
@@ -96,7 +97,7 @@ Reply to this email if you have any questions.
   }, 100);
 });
 
-// ✅ Contact Message Endpoint (unchanged)
+// ✅ Contact Message Endpoint (unchanged logic)
 app.post("/contact", async (req, res) => {
   const { name, email, message } = req.body;
   console.log("📩 Received contact message:", req.body);
@@ -107,15 +108,18 @@ app.post("/contact", async (req, res) => {
 
   try {
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,                           // ✅ uses your .env
-      port: parseInt(process.env.SMTP_PORT),                 // ✅ dynamic
-      secure: parseInt(process.env.SMTP_PORT) === 465,       // ✅ correct for TLS/SSL
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT, 10),
+      secure: parseInt(process.env.SMTP_PORT, 10) === 465,
+      requireTLS: parseInt(process.env.SMTP_PORT, 10) === 587,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
+      tls: {
+        rejectUnauthorized: false
+      }
     });
-    
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
