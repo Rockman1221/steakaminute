@@ -80,7 +80,7 @@ const Checkout = () => {
         <br />
         • Order by Thursday for Fri–Sun delivery.
         <br />
-        📍 <strong>Note:</strong> Delivery is currently available <strong>only in Waterloo.</strong>
+        
       </Alert>
 
       <Form onSubmit={handleSubmit}>
