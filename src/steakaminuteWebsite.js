@@ -3,7 +3,7 @@ import "./App.css";
 import React, { useState, useMemo } from "react";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-
+import logo from "./logo.png";
 const SteakaminuteWebsite = () => {
   const navigate = useNavigate();
 
@@ -80,7 +80,14 @@ const SteakaminuteWebsite = () => {
           <a href="#about" className="text-white mx-3">About</a>
           <a href="#contact" className="text-white mx-3">Contact</a>
         </nav>
-      
+        <div className="text-center my-3">
+  <img
+    src={logo}
+    alt="Steak A Minute Logo"
+    style={{ maxWidth: "200px", height: "auto" }}
+  />
+</div>
+
 
       {/* ✅ Hero Section */}
       <section className="text-center py-5 bg-light">
