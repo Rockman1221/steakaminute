@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #b23b3b;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@
   }
 }
 /* 🔥 Fix Image Sizes */
-./* 🔥 Fix Image Sizes - Make all images uniform */
+/* 🔥 Fix Image Sizes - Make all images uniform */
 .product-image {
   width: 100%; /* Ensure images take the full width of the container */
   height: 250px; /* Force all images to have the same height */
