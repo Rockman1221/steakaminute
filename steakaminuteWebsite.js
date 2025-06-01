@@ -46,22 +46,73 @@ const steakaminuteWebsite = () => {
 
   return (
     <div>
-      {/* ✅ Header Section */}
-      <header className="bg-danger text-white p-4 text-center">
-        <h1 className="fw-bold">Steak A Minute</h1>
-        <nav>
-          <a href="#about" className="text-white mx-3">About</a>
-          <a href="#contact" className="text-white mx-3">Contact</a>
+      {/* === Header Section (updated) === */}
+      <header
+        style={{
+          background: "var(--logo-brown, #231709)",
+          color: "var(--logo-cream, #F4E2B0)",
+          borderBottom: "6px solid var(--logo-red, #A52A2A)",
+          padding: "2.5rem 1rem 1.5rem 1rem",
+          textAlign: "center",
+          letterSpacing: "0.08em",
+          boxShadow: "0 4px 12px rgba(59,38,21,0.07)"
+        }}
+      >
+        <h1
+          className="fw-bold"
+          style={{
+            fontFamily: "'Oswald', 'Montserrat', Arial, sans-serif",
+            fontWeight: 700,
+            fontSize: "2.8rem",
+            color: "var(--logo-red, #A52A2A)",
+            textShadow: "0 2px 10px #23170955"
+          }}
+        >
+          Steak A Minute
+        </h1>
+        <nav style={{ marginTop: "1.1rem" }}>
+          <a
+            href="#about"
+            style={{
+              color: "var(--logo-cream, #F4E2B0)",
+              margin: "0 20px",
+              fontWeight: 600,
+              fontSize: "1.05rem",
+              letterSpacing: "0.03em",
+              textDecoration: "none",
+              transition: "color 0.2s"
+            }}
+            onMouseOver={e => e.target.style.color = "var(--logo-red, #A52A2A)"}
+            onMouseOut={e => e.target.style.color = "var(--logo-cream, #F4E2B0)"}
+          >
+            About
+          </a>
+          <a
+            href="#contact"
+            style={{
+              color: "var(--logo-cream, #F4E2B0)",
+              margin: "0 20px",
+              fontWeight: 600,
+              fontSize: "1.05rem",
+              letterSpacing: "0.03em",
+              textDecoration: "none",
+              transition: "color 0.2s"
+            }}
+            onMouseOver={e => e.target.style.color = "var(--logo-red, #A52A2A)"}
+            onMouseOut={e => e.target.style.color = "var(--logo-cream, #F4E2B0)"}
+          >
+            Contact
+          </a>
         </nav>
       </header>
 
-      {/* ✅ Hero Section */}
+      {/* === Hero Section === */}
       <section className="text-center py-5 bg-light">
         <h2 className="display-4 fw-bold">Fresh Meat Delivered to Your Doorstep</h2>
         <p className="text-muted">We deliver fresh, high-quality meats to your home.</p>
       </section>
 
-      {/* ✅ Shop Section */}
+      {/* === Shop Section === */}
       <section id="shop" className="py-5 bg-white">
         <Container>
           <h2 className="text-center fw-bold mb-4">Our Meat Selection</h2>
@@ -98,7 +149,7 @@ const steakaminuteWebsite = () => {
         </Container>
       </section>
 
-      {/* ✅ About Section */}
+      {/* === About Section === */}
       <section id="about" className="py-5 bg-light text-center">
         <Container>
           <h2 className="fw-bold">About Us</h2>
@@ -106,7 +157,7 @@ const steakaminuteWebsite = () => {
         </Container>
       </section>
 
-      {/* ✅ Contact Section */}
+      {/* === Contact Section === */}
       <section id="contact" className="py-5 bg-white text-center">
         <Container>
           <h2 className="fw-bold">Contact Us</h2>
@@ -114,9 +165,21 @@ const steakaminuteWebsite = () => {
         </Container>
       </section>
 
-      {/* ✅ Footer */}
-      <footer className="bg-danger text-white text-center py-3">
-        <p className="mb-0">&copy; 2025 Steak A Minute. All rights reserved.</p>
+      {/* === Footer Section (updated) === */}
+      <footer
+        style={{
+          background: "var(--logo-brown, #231709)",
+          color: "var(--logo-cream, #F4E2B0)",
+          textAlign: "center",
+          padding: "1.2rem 0 0.7rem 0",
+          fontSize: "1.1rem",
+          borderTop: "5px solid var(--logo-red, #A52A2A)",
+          letterSpacing: "0.06em"
+        }}
+      >
+        <p className="mb-0" style={{ opacity: 0.9 }}>
+          &copy; 2025 Steak A Minute. All rights reserved.
+        </p>
       </footer>
     </div>
   );

@@ -1,57 +1,69 @@
 :root {
-  --logo-brown: #3B2615;
-  --logo-cream: #F4E2B0;
-  --logo-red: #A52A2A;
+  --logo-brown: #3B2615;         /* Rich brown from your logo */
+  --logo-cream: #F4E2B0;         /* Cream from your logo */
+  --logo-red: #A52A2A;           /* Deep steak red */
+  --dark-bg: #18110a;            /* Nearly black, warm dark for background */
 }
 
-/* App container */
+/* App container: dark background for contrast */
 .App {
   text-align: center;
-  background: var(--logo-brown);
+  background: var(--dark-bg);
   color: var(--logo-cream);
   min-height: 100vh;
 }
 
-/* Logo animation */
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-/* Only animate if no-reduced-motion */
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-/* HEADER STYLE: use logo brown + cream */
+/* HEADER: Cream text on brown, strong border bottom */
 .App-header {
-  background-color: var(--logo-brown);
+  background: var(--logo-brown);
   color: var(--logo-cream);
-  min-height: 90vh;
+  min-height: 180px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  border-bottom: 8px solid var(--logo-red);
+  font-size: calc(16px + 1.5vmin);
+  border-bottom: 6px solid var(--logo-red);
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 24px rgba(59,38,21,0.12);
 }
 
-/* Links (buttons or nav) in cream with red hover */
-.App-link {
-  color: var(--logo-red);
-  text-decoration: underline;
-  transition: color 0.2s;
+/* Logo styling in header (optional) */
+.App-logo {
+  height: 80px;
+  margin-bottom: 12px;
+  margin-top: 10px;
 }
-.App-link:hover {
+
+/* Navigation links in header */
+.header-nav {
+  margin-top: 10px;
+  display: flex;
+  gap: 24px;
+}
+
+.header-link {
+  color: var(--logo-cream);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.15rem;
+  padding: 4px 14px;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.header-link:hover {
+  background: var(--logo-red);
   color: var(--logo-cream);
 }
 
-/* Logo Spin Animation */
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg);}
-  to { transform: rotate(360deg);}
+/* Main content area for visual separation */
+.main-content {
+  background: transparent;
+  color: var(--logo-cream);
+  min-height: 60vh;
+  padding-bottom: 40px;
+  padding-top: 30px;
 }
 
 /* PRODUCT IMAGE */
@@ -83,11 +95,32 @@
   justify-content: space-between;
 }
 
-/* Footer style (if you have one) */
+/* FOOTER: Logo brown background, cream text, red top border */
 footer {
-  background: var(--logo-red);
+  background: var(--logo-brown);
   color: var(--logo-cream);
   padding: 24px 0 12px 0;
   font-size: 1.1rem;
-  border-top: 6px solid var(--logo-brown);
+  border-top: 6px solid var(--logo-red);
+  box-shadow: 0 -4px 24px rgba(59,38,21,0.10);
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+  .App-header {
+    min-height: 120px;
+    font-size: 1rem;
+  }
+  .header-link {
+    font-size: 1rem;
+    padding: 4px 10px;
+  }
+}
+
+/* Logo Spin Animation (if used somewhere) */
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg);}
+  to { transform: rotate(360deg);}
 }
