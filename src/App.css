@@ -162,3 +162,45 @@ footer {
   from { transform: rotate(0deg);}
   to { transform: rotate(360deg);}
 }
+/* --- Contact Form Styles --- */
+.contact-section form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--logo-cream);
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(59,38,21,0.07);
+  padding: 28px 16px;
+}
+.contact-section .form-control {
+  background: #fff6e0;
+  color: var(--logo-brown);
+  border-radius: 6px;
+  border: 1.5px solid var(--logo-red);
+  margin-bottom: 14px;
+  font-size: 1.07rem;
+  box-shadow: 0 2px 8px rgba(59,38,21,0.03);
+  transition: border-color 0.2s;
+}
+.contact-section .form-control:focus {
+  border-color: var(--logo-brown);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--logo-red);
+}
+.contact-section label {
+  color: var(--logo-brown);
+  font-weight: 600;
+  margin-bottom: 0.5em;
+}
+.contact-section button.btn-primary {
+  background: var(--logo-red);
+  border: none;
+  padding: 8px 36px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.contact-section button.btn-primary:hover {
+  background: var(--logo-brown);
+  color: var(--logo-cream);
+}

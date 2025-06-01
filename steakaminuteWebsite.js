@@ -148,7 +148,7 @@ const steakaminuteWebsite = () => {
           </div>
         </Container>
       </section>
-
+      <ContactSection />
       {/* === About Section === */}
       <section id="about" className="py-5 bg-light text-center">
         <Container>
@@ -157,13 +157,7 @@ const steakaminuteWebsite = () => {
         </Container>
       </section>
 
-      {/* === Contact Section === */}
-      <section id="contact" className="py-5 bg-white text-center">
-        <Container>
-          <h2 className="fw-bold">Contact Us</h2>
-          <p className="text-muted">Have questions? Contact us for more details about our products or delivery services.</p>
-        </Container>
-      </section>
+      
 
       {/* === Footer Section (updated) === */}
       <footer
