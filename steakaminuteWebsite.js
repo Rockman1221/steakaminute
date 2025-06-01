@@ -125,8 +125,6 @@ const steakaminuteWebsite = () => {
                   <Card.Body className="text-center">
                     <h4 className="fw-bold">{product.name}</h4>
                     <p className="text-danger fw-bold">${product.price}/lb</p>
-                    
-                    {/* ✅ Quantity Selector */}
                     <Form.Group className="mb-3">
                       <Form.Label>Select Quantity:</Form.Label>
                       <Form.Control
@@ -150,7 +148,7 @@ const steakaminuteWebsite = () => {
         </Container>
       </section>
 
-      {/* === Contact Section (ONLY THIS) === */}
+      {/* === Contact Section (only this, no duplicate!) === */}
       <ContactSection />
 
       {/* === About Section === */}
