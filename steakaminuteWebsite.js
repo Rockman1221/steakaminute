@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import ContactSection from "./ContactSection"; // Make sure this path matches your file structure
 
 const steakaminuteWebsite = () => {
   const navigate = useNavigate();
@@ -148,7 +149,10 @@ const steakaminuteWebsite = () => {
           </div>
         </Container>
       </section>
+
+      {/* === Contact Section (ONLY THIS) === */}
       <ContactSection />
+
       {/* === About Section === */}
       <section id="about" className="py-5 bg-light text-center">
         <Container>
@@ -156,8 +160,6 @@ const steakaminuteWebsite = () => {
           <p className="text-muted">We provide top-quality meats delivered straight to your doorstep. Our commitment is to freshness and convenience.</p>
         </Container>
       </section>
-
-      
 
       {/* === Footer Section (updated) === */}
       <footer
