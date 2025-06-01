@@ -1,9 +1,10 @@
-import ContactSection from './ContactSection'; // Adjust the relative path if needed.
+import ContactSection from './ContactSection'; // Adjust path if needed
 import "./App.css"; 
 import React, { useState, useMemo } from "react";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import logo from "./logo.png";
+
 const SteakaminuteWebsite = () => {
   const navigate = useNavigate();
 
@@ -13,32 +14,23 @@ const SteakaminuteWebsite = () => {
     { id: 2, name: "T-Bone Steak", price: 13.99, img: "/images/tbone-steak.jpg" },
     { id: 3, name: "Sirloin Steak", price: 13.99, img: "/images/sirloin-steak.jpg" },
     { id: 4, name: "Veal Steak", price: 9.99, img: "/images/veal-steak.jpg" },
-{ id: 5, name: "Veal Tomahawk Steak", price: 10.99, img: "/images/veal-tomahawk.jpg" },
-
+    { id: 5, name: "Veal Tomahawk Steak", price: 10.99, img: "/images/veal-tomahawk.jpg" },
   ], []);
 
   const [quantities, setQuantities] = useState({});
-
-
-  // Cart State
   const [cart, setCart] = useState([]);
 
   const handleQuantityChange = (id, value) => {
-    // Allow blank input
     if (value === "") {
       setQuantities((prev) => ({ ...prev, [id]: "" }));
     } else {
-      // Convert to number and update (allowing zero)
       const num = parseInt(value, 10);
       setQuantities((prev) => ({ ...prev, [id]: isNaN(num) ? "" : num }));
     }
   };
-  
 
-  // ✅ Corrected Add to Cart Function
   const handleAddToCart = () => {
     const updatedCart = [];
-
     products.forEach(product => {
       const quantity = quantities[product.id];
       if (quantity > 0) {
@@ -50,58 +42,34 @@ const SteakaminuteWebsite = () => {
       alert("Please select at least one product to add to cart.");
       return;
     }
-
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     navigate("/checkout");
   };
 
   return (
-    <div>
-      {/* ✅ Header Section */}
-      
-      <header className="bg-danger text-white p-4 text-center">
-  <h3 className="fw-bold">
-  Steakaminute delivers fresh, hand-cut steaks for nearly half the market price!
-  </h3>
-  <p className="lead">
-  <p className="lead">
-  We solve your need for quality and convenience with <strong>free vacuum packing on every order</strong> and <strong>free delivery on your first order</strong>.
-</p>
-
-  </p>
-  <nav>
-    <a href="#about" className="text-white mx-3">About</a>
-    <a href="#contact" className="text-white mx-3">Contact</a>
-  </nav>
-</header>
-
-        <nav>
-          <a href="#about" className="text-white mx-3">About</a>
-          <a href="#contact" className="text-white mx-3">Contact</a>
+    <div className="App">
+      {/* === HEADER with logo & nav === */}
+      <header className="App-header">
+        <img src={logo} alt="Steak A Minute Logo" className="App-logo" />
+        <nav className="header-nav">
+          <a href="#about" className="header-link">About</a>
+          <a href="#contact" className="header-link">Contact</a>
         </nav>
-        <div className="text-center my-3">
-  <img
-    src={logo}
-    alt="Steak A Minute Logo"
-    style={{ maxWidth: "200px", height: "auto" }}
-  />
-</div>
+      </header>
 
-
-      {/* ✅ Hero Section */}
-      <section className="text-center py-5 bg-light">
+      {/* === Hero Section === */}
+      <section className="main-content">
         <h2 className="display-4 fw-bold">Fresh Meat Delivered to Your Doorstep</h2>
-        <p className="text-muted">
+        <p style={{ color: "#F4E2B0" }}>
           We deliver fresh, high-quality meats to your home.
         </p>
       </section>
 
-      {/* ✅ Shop Section */}
-      <section id="shop" className="py-5 bg-white">
+      {/* === Shop Section === */}
+      <section id="shop" className="py-5" style={{ background: "transparent" }}>
         <Container>
-          <h2 className="text-center fw-bold mb-4">Our Meat Selection</h2>
-
+          <h2 className="text-center fw-bold mb-4" style={{ color: "#F4E2B0" }}>Our Meat Selection</h2>
           <Row>
             {products.map((product) => (
               <Col key={product.id} md={4} className="mb-4">
@@ -109,8 +77,7 @@ const SteakaminuteWebsite = () => {
                   <Card.Img variant="top" src={product.img} className="product-image" />
                   <Card.Body className="text-center">
                     <h4 className="fw-bold">{product.name}</h4>
-                    <p className="text-danger fw-bold">${product.price}/lb</p>
-
+                    <p style={{ color: "#A52A2A", fontWeight: "bold" }}>${product.price}/lb</p>
                     <Form.Group className="mb-3">
                       <Form.Label>Select Quantity:</Form.Label>
                       <Form.Control
@@ -125,7 +92,6 @@ const SteakaminuteWebsite = () => {
               </Col>
             ))}
           </Row>
-
           <div className="text-center">
             <Button variant="success" onClick={handleAddToCart}>
               Add to Cart
@@ -136,19 +102,18 @@ const SteakaminuteWebsite = () => {
 
       <ContactSection />
 
-      
-  {/* ✅ About Section */}
-  <section id="about" className="py-5 bg-light text-center">
+      {/* === About Section === */}
+      <section id="about" className="py-5 text-center" style={{ background: "#3B2615" }}>
         <Container>
-          <h2 className="fw-bold">About Us</h2>
-          <p className="text-muted">
+          <h2 className="fw-bold" style={{ color: "#F4E2B0" }}>About Us</h2>
+          <p className="text-muted" style={{ color: "#F4E2B0" }}>
             We provide top-quality meats delivered straight to your doorstep. Our commitment is to freshness and convenience.
           </p>
         </Container>
       </section>
 
-      {/* ✅ Footer */}
-      <footer className="bg-danger text-white text-center py-3">
+      {/* === Footer === */}
+      <footer>
         <p className="mb-0">&copy; 2025 Steak A Minute. All rights reserved.</p>
       </footer>
     </div>
