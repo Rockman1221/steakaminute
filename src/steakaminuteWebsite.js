@@ -101,16 +101,44 @@ const SteakaminuteWebsite = () => {
       </section>
 
       <ContactSection />
-
+      <section id="contact" className="contact-section py-5 text-center">
+  <Container>
+    <h2 className="fw-bold">Contact Us</h2>
+    <p>Have questions or suggestions? Fill out the form below and we'll get in touch.</p>
+    <Form>
+      <Row className="mb-3">
+        <Col md={6}>
+          <Form.Group controlId="formName">
+            <Form.Label>Name</Form.Label>
+            <Form.Control type="text" placeholder="Your name" />
+          </Form.Group>
+        </Col>
+        <Col md={6}>
+          <Form.Group controlId="formEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" placeholder="Your email" />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Form.Group className="mb-3" controlId="formMessage">
+        <Form.Label>Message</Form.Label>
+        <Form.Control as="textarea" rows={3} placeholder="Your message or suggestion" />
+      </Form.Group>
+      <Button variant="success" type="submit">Send</Button>
+    </Form>
+  </Container>
+</section>
       {/* === About Section === */}
-      <section id="about" className="py-5 text-center" style={{ background: "#3B2615" }}>
-        <Container>
-          <h2 className="fw-bold" style={{ color: "#F4E2B0" }}>About Us</h2>
-          <p className="text-muted" style={{ color: "#F4E2B0" }}>
-            We provide top-quality meats delivered straight to your doorstep. Our commitment is to freshness and convenience.
-          </p>
-        </Container>
-      </section>
+      <section id="about" className="about-section py-5 text-center">
+  <Container>
+    <h2 className="fw-bold">About Us</h2>
+    <p>
+      We provide top-quality meats delivered straight to your doorstep.<br/>
+      Our commitment is to freshness and convenience.
+    </p>
+  </Container>
+</section>
+
 
       {/* === Footer === */}
       <footer>
