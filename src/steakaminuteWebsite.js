@@ -101,7 +101,7 @@ const SteakaminuteWebsite = () => {
       </section>
 
       <ContactSection />
-      <section id="contact" className="contact-section py-5 text-center">
+      
   <Container>
     <h2 className="fw-bold">Contact Us</h2>
     <p>Have questions or suggestions? Fill out the form below and we'll get in touch.</p>
