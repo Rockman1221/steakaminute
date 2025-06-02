@@ -1,4 +1,4 @@
-import ContactSection from './ContactSection'; // Adjust path if needed
+
 import "./App.css"; 
 import React, { useState, useMemo } from "react";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
@@ -100,7 +100,7 @@ const SteakaminuteWebsite = () => {
         </Container>
       </section>
 
-      <ContactSection />
+      
       
   <Container>
     <h2 className="fw-bold">Contact Us</h2>
