@@ -1,4 +1,4 @@
-
+import ContactSection from './ContactSection'; // Adjust path if needed
 import "./App.css"; 
 import React, { useState, useMemo } from "react";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
@@ -127,7 +127,6 @@ const SteakaminuteWebsite = () => {
       <Button variant="success" type="submit">Send</Button>
     </Form>
   </Container>
-  <ContactSection />
 
       {/* === About Section === */}
       <section id="about" className="about-section py-5 text-center">
