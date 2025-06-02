@@ -149,7 +149,7 @@ const steakaminuteWebsite = () => {
       </section>
 
       {/* === Contact Section (only this, no duplicate!) === */}
-      <ContactSection />
+      
 
       {/* === About Section === */}
       <section id="about" className="py-5 bg-light text-center">
