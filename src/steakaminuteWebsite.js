@@ -100,33 +100,6 @@ const SteakaminuteWebsite = () => {
         </Container>
       </section>
 
-    
-      
-  <Container>
-    <h2 className="fw-bold">Contact Us</h2>
-    <p>Have questions or suggestions? Fill out the form below and we'll get in touch.</p>
-    <Form>
-      <Row className="mb-3">
-        <Col md={6}>
-          <Form.Group controlId="formName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="Your name" />
-          </Form.Group>
-        </Col>
-        <Col md={6}>
-          <Form.Group controlId="formEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Your email" />
-          </Form.Group>
-        </Col>
-      </Row>
-      <Form.Group className="mb-3" controlId="formMessage">
-        <Form.Label>Message</Form.Label>
-        <Form.Control as="textarea" rows={3} placeholder="Your message or suggestion" />
-      </Form.Group>
-      <Button variant="success" type="submit">Send</Button>
-    </Form>
-  </Container>
   <ContactSection />
       {/* === About Section === */}
       <section id="about" className="about-section py-5 text-center">

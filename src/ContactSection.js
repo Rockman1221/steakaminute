@@ -43,7 +43,7 @@ const ContactSection = () => {
     >
       <Container>
         <h2 className="fw-bold mb-2" style={{ color: 'var(--logo-cream, #F4E2B0)' }}>
-          
+          Contact Us
         </h2>
         <p style={{ color: 'var(--logo-cream, #F4E2B0)', opacity: 0.8 }}>
           Have questions or suggestions? Fill out the form below and we'll get in touch.
