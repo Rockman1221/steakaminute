@@ -148,7 +148,7 @@ const steakaminuteWebsite = () => {
         </Container>
       </section>
 
-      {/* === Contact Section (only this, no duplicate!) === */}
+      
       
 
       {/* === About Section === */}
