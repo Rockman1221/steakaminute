@@ -100,7 +100,7 @@ const SteakaminuteWebsite = () => {
         </Container>
       </section>
 
-      
+    
       
   <Container>
     <h2 className="fw-bold">Contact Us</h2>
@@ -127,7 +127,7 @@ const SteakaminuteWebsite = () => {
       <Button variant="success" type="submit">Send</Button>
     </Form>
   </Container>
-
+  <ContactSection />
       {/* === About Section === */}
       <section id="about" className="about-section py-5 text-center">
   <Container>
