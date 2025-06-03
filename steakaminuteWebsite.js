@@ -1,4 +1,3 @@
-import { Container, Row, Col } from "react-bootstrap";
 import React, { useState, useMemo } from "react";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -152,7 +151,7 @@ const steakaminuteWebsite = () => {
       
 
 
-// ...rest of your component
+
 
 <section id="about" className="about-section py-5" style={{ background: "#3a220f" }}>
   <Container>
