@@ -3,7 +3,7 @@ import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ContactSection from "./ContactSection"; // Make sure this path matches your file structure
 
-const steakaminuteWebsite = () => {
+const SteakaminuteWebsite = () => {
   const navigate = useNavigate();
 
   // ✅ Product List
@@ -148,49 +148,46 @@ const steakaminuteWebsite = () => {
         </Container>
       </section>
 
-      
-
-
-
-
-<section id="about" className="about-section py-5" style={{ background: "#3a220f" }}>
-  <Container>
-    <Row className="align-items-center">
-      <Col md={6} className="mb-4 mb-md-0 d-flex justify-content-center">
-        <video
-          src="/steakaminute.mp4"
-          controls
-          autoPlay
-          muted
-          loop
-          style={{
-            width: "100%",
-            maxWidth: "390px",
-            borderRadius: "16px",
-            boxShadow: "0 6px 32px rgba(0,0,0,0.15)",
-            border: "4px solid #a85b27"
-          }}
-        />
-      </Col>
-      <Col md={6}>
-        <h2 className="fw-bold mb-3" style={{ color: "#ffe49b" }}>Our Mission</h2>
-        <p style={{ fontSize: "1.15rem", color: "#ffe49b" }}>
-          At <strong>Steakaminute</strong>, we’re on a mission to revolutionize the way you enjoy steak at home.<br /><br />
-           every cut you receive is hand-selected, expertly prepared, and <b>never frozen</b>. Our commitment is to deliver <b>premium, best steaks</b> to your door, always fresh and bursting with flavor.<br /><br />
-          <strong>We don’t just deliver meat—we deliver an experience:</strong><br />
-          <ul style={{ color: "#ffe49b", paddingLeft: "1.2em" }}>
-            <li><b>Unmatched Freshness:</b> Your order is cut, packed, and dispatched within hours, not days.</li>
-            <li><b>Local Quality:</b> By choosing Steakaminute get meat sourced right from local Ontario.</li>
-            <li><b>Pure Health:</b> We believe that great steak is the foundation of a healthier, more energetic life. No shortcuts, no compromises—just honest food you can trust.</li>
-          </ul>
-          With Steakaminute, you’re not settling for ordinary—you’re choosing the highest standard of quality, convenience, and care.<br />
-          <b>Taste the difference. Feel the difference. Experience the local advantage with Steakaminute.</b>
-        </p>
-      </Col>
-    </Row>
-  </Container>
-</section>
-
+      {/* === About Section === */}
+      <section id="about" className="about-section py-5" style={{ background: "#3a220f" }}>
+        <Container>
+          <Row className="align-items-center">
+            <Col md={6} className="mb-4 mb-md-0 d-flex justify-content-center">
+              <video
+                src="/steakaminute.mp4"
+                controls
+                autoPlay
+                muted
+                loop
+                style={{
+                  width: "100%",
+                  maxWidth: "390px",
+                  borderRadius: "16px",
+                  boxShadow: "0 6px 32px rgba(0,0,0,0.15)",
+                  border: "4px solid #a85b27"
+                }}
+              />
+            </Col>
+            <Col md={6}>
+              <h2 className="fw-bold mb-3" style={{ color: "#ffe49b" }}>Our Mission</h2>
+              <p style={{ fontSize: "1.15rem", color: "#ffe49b" }}>
+                At <strong>Steakaminute</strong>, we’re on a mission to revolutionize the way you enjoy steak at home.<br /><br />
+                Every cut you receive is hand-selected, expertly prepared, and <b>never frozen</b>. Our commitment is to deliver <b>premium, best steaks</b> to your door, always fresh and bursting with flavor.<br /><br />
+                <strong>We don’t just deliver meat—we deliver an experience:</strong>
+              </p>
+              <ul style={{ color: "#ffe49b", paddingLeft: "1.2em", fontSize: "1.08rem" }}>
+                <li><b>Unmatched Freshness:</b> Your order is cut, packed, and dispatched within hours, not days.</li>
+                <li><b>Local Quality:</b> By choosing Steakaminute, you get meat sourced right from local Ontario.</li>
+                <li><b>Pure Health:</b> We believe that great steak is the foundation of a healthier, more energetic life. No shortcuts, no compromises—just honest food you can trust.</li>
+              </ul>
+              <p style={{ fontSize: "1.15rem", color: "#ffe49b" }}>
+                With Steakaminute, you’re not settling for ordinary—you’re choosing the highest standard of quality, convenience, and care.<br />
+                <b>Taste the difference. Feel the difference. Experience the local advantage with Steakaminute.</b>
+              </p>
+            </Col>
+          </Row>
+        </Container>
+      </section>
 
       {/* === Footer Section (updated) === */}
       <footer
@@ -212,4 +209,4 @@ const steakaminuteWebsite = () => {
   );
 };
 
-export default steakaminuteWebsite;
+export default SteakaminuteWebsite;
