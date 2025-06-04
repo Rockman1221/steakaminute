@@ -112,6 +112,7 @@ const SteakaminuteWebsite = () => {
           autoPlay
           muted
           loop
+          playsInline
           style={{
             width: "100%",
             maxWidth: "390px",
