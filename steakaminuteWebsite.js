@@ -3,7 +3,7 @@ import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ContactSection from "./ContactSection"; // Make sure this path matches your file structure
 
-const steakaminuteWebsite = () => {
+const SteakaminuteWebsite = () => {
   const navigate = useNavigate();
 
   // ✅ Product List
@@ -209,4 +209,4 @@ const steakaminuteWebsite = () => {
   );
 };
 
-export default steakaminuteWebsite;
+export default SteakaminuteWebsite;
