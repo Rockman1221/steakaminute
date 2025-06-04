@@ -5,7 +5,7 @@ import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import logo from "./logo.png";
 
-const steakaminuteWebsite = () => {
+const SteakaminuteWebsite = () => {
   const navigate = useNavigate();
 
   // Product List
@@ -152,4 +152,4 @@ const steakaminuteWebsite = () => {
   );
 };
 
-export default steakaminuteWebsite;
+export default SteakaminuteWebsite;
