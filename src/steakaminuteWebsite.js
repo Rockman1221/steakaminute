@@ -92,11 +92,7 @@ const SteakaminuteWebsite = () => {
               </Col>
             ))}
           </Row>
-          <div className="text-center">
-            <Button variant="success" onClick={handleAddToCart}>
-              Add to Cart
-            </Button>
-          </div>
+         
         </Container>
       </section>
 
@@ -142,7 +138,33 @@ const SteakaminuteWebsite = () => {
     </Row>
   </Container>
 </section>
-
+{/* === Sticky Add to Cart Button (always visible at bottom) === */}
+<div
+  style={{
+    position: "fixed",
+    bottom: 0,
+    left: 0,
+    width: "100%",
+    background: "#28a745",
+    textAlign: "center",
+    zIndex: 9999,
+    padding: "12px 0",
+    boxShadow: "0 -2px 18px #0006",
+  }}
+>
+  <Button
+    variant="success"
+    style={{
+      fontWeight: "bold",
+      minWidth: "200px",
+      fontSize: "1.1rem",
+      padding: "10px 24px",
+    }}
+    onClick={handleAddToCart}
+  >
+    Add to Cart
+  </Button>
+</div>
 
 
       {/* === Footer === */}
