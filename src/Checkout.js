@@ -147,7 +147,7 @@ const Checkout = () => {
               <Form.Select required>
                 <option value="">Select Payment Option</option>
                 <option value="interac">Interac e-Transfer (Auto-deposit enabled)</option>
-                <option value="cod">Pay on Delivery (COD)</option>
+                <option value="cod">Pay on Delivery </option>
               </Form.Select>
               <Form.Text className="text-muted">
                 For Interac e-Transfer, payments will auto-deposit to steakaminute@gmail.com.
