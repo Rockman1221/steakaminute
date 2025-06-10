@@ -97,7 +97,7 @@ Reply to this email if you have any questions.
   }, 100);
 });
 
-// ✅ Contact Message Endpoint (unchanged logic)
+// ✅ Contact Message Endpoint (IMPROVED for instant response)
 app.post("/contact", async (req, res) => {
   const { name, email, message } = req.body;
   console.log("📩 Received contact message:", req.body);
@@ -106,41 +106,48 @@ app.post("/contact", async (req, res) => {
     return res.status(400).json({ message: "⚠️ Missing required contact details." });
   }
 
-  try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT, 10),
-      secure: parseInt(process.env.SMTP_PORT, 10) === 465,
-      requireTLS: parseInt(process.env.SMTP_PORT, 10) === 587,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-      tls: {
-        rejectUnauthorized: false
+  // 1. Respond to the frontend right away!
+  res.status(200).json({ message: "Thank you for contacting us! Your message has been sent." });
+
+  // 2. Send the email in the background
+  setTimeout(() => {
+    (async () => {
+      try {
+        const transporter = nodemailer.createTransport({
+          host: process.env.SMTP_HOST,
+          port: parseInt(process.env.SMTP_PORT, 10),
+          secure: parseInt(process.env.SMTP_PORT, 10) === 465,
+          requireTLS: parseInt(process.env.SMTP_PORT, 10) === 587,
+          auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+          },
+          tls: {
+            rejectUnauthorized: false
+          }
+        });
+
+        const mailOptions = {
+          from: process.env.EMAIL_USER,
+          to: process.env.EMAIL_USER,
+          subject: "New Contact Message from Steak A Minute",
+          html: `
+            <h2>New Contact Message</h2>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Message:</strong> ${message}</p>
+          `,
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log("✅ Contact email sent successfully!");
+      } catch (error) {
+        console.error("🚨 Error sending contact email:", error);
       }
-    });
-
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: "New Contact Message from Steak A Minute",
-      html: `
-        <h2>New Contact Message</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong> ${message}</p>
-      `,
-    };
-
-    await transporter.sendMail(mailOptions);
-    console.log("✅ Contact email sent successfully!");
-    res.status(200).json({ message: "Thank you for contacting us! Your message has been sent." });
-  } catch (error) {
-    console.error("🚨 Error sending contact email:", error);
-    res.status(500).json({ message: "⚠️ Failed to send contact email." });
-  }
+    })();
+  }, 100);
 });
+
 
 // ✅ Start Server
 app.listen(PORT, () => {
