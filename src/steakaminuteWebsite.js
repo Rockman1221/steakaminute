@@ -142,14 +142,12 @@ const SteakaminuteWebsite = () => {
 <div
   style={{
     position: "fixed",
-    bottom: 0,
-    left: 0,
-    width: "100%",
-    background: "#28a745",
-    textAlign: "center",
+    bottom: "30px",
+    left: "50%",
+    transform: "translateX(-50%)",
     zIndex: 9999,
-    padding: "12px 0",
-    boxShadow: "0 -2px 18px #0006",
+    background: "transparent", // No bar, just the button
+    textAlign: "center"
   }}
 >
   <Button
@@ -158,13 +156,16 @@ const SteakaminuteWebsite = () => {
       fontWeight: "bold",
       minWidth: "200px",
       fontSize: "1.1rem",
-      padding: "10px 24px",
+      padding: "10px 36px",
+      borderRadius: "12px",
+      boxShadow: "0 4px 18px #0005"
     }}
     onClick={handleAddToCart}
   >
     Add to Cart
   </Button>
 </div>
+
 
 
       {/* === Footer === */}
