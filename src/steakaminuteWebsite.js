@@ -59,12 +59,45 @@ const SteakaminuteWebsite = () => {
       </header>
 
       {/* === Hero Section === */}
-      <section className="main-content">
-        <h2 className="display-4 fw-bold">Fresh Meat Delivered to Your Doorstep</h2>
-        <p style={{ color: "#F4E2B0" }}>
-          We deliver fresh, high-quality meats to your home.
-        </p>
-      </section>
+      {/* === Hero Section with Background Video === */}
+<section className="hero-section-with-video" style={{ position: "relative", minHeight: "430px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+  {/* Background video */}
+  <video
+    className="hero-bg-video"
+    src="/hero-section.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+    style={{
+      position: "absolute",
+      top: 0, left: 0,
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      zIndex: 0,
+      opacity: 0.42,
+      pointerEvents: "none"
+    }}
+  />
+  {/* Dark overlay for readability */}
+  <div style={{
+    position: "absolute",
+    top: 0, left: 0, width: "100%", height: "100%",
+    background: "rgba(24,17,10,0.68)",
+    zIndex: 1
+  }} />
+  {/* Content */}
+  <div style={{ position: "relative", zIndex: 2, width: "100%" }}>
+    <h2 className="display-4 fw-bold" style={{ color: "var(--logo-cream)" }}>
+      Fresh Meat Delivered to Your Doorstep
+    </h2>
+    <p style={{ color: "var(--logo-cream)", fontSize: "1.2rem" }}>
+      We deliver fresh, high-quality meats to your home.
+    </p>
+  </div>
+</section>
+
 
       {/* === Shop Section === */}
       <section id="shop" className="py-5" style={{ background: "transparent" }}>
