@@ -276,14 +276,14 @@ footer {
   opacity: 0.75; /* Or your preferred value */
   pointer-events: none;
 }
-
-/* Responsive tweaks for mobile */
 @media (max-width: 800px) {
   .hero-section-with-video {
-    min-height: 200px;
+    min-height: 340px; /* Try 340-420px and adjust as needed */
+    padding-top: 30px;  /* Push content down under nav */
   }
   .hero-bg-video {
-    min-height: 200px;
-    object-position: center 40%; /* Tweak 40% up/down to get steak in frame */
+    min-height: 340px;
+    object-position: center 40%;
   }
 }
+
