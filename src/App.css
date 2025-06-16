@@ -252,3 +252,23 @@ footer {
   background: #881a1a !important;
   color: #fffbe9 !important;
 }
+/* === HERO SECTION VIDEO BACKGROUND === */
+.hero-section-with-video {
+  position: relative;
+  min-height: 430px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Prevent scrollbars from the video */
+}
+
+.hero-bg-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.42; /* You can adjust for more/less visibility */
+  pointer-events: none;
+}
