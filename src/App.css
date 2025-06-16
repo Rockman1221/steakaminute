@@ -253,6 +253,8 @@ footer {
   color: #fffbe9 !important;
 }
 /* === HERO SECTION VIDEO BACKGROUND === */
+
+
 .hero-section-with-video {
   position: relative;
   min-height: 430px;
@@ -260,6 +262,7 @@ footer {
   align-items: center;
   justify-content: center;
   overflow: hidden; /* Prevent scrollbars from the video */
+  margin-top: 0; /* Adjust if you want gap below header */
 }
 
 .hero-bg-video {
@@ -268,7 +271,19 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   z-index: 0;
-  opacity: 0.42; /* You can adjust for more/less visibility */
+  opacity: 0.75; /* Or your preferred value */
   pointer-events: none;
+}
+
+/* Responsive tweaks for mobile */
+@media (max-width: 800px) {
+  .hero-section-with-video {
+    min-height: 200px;
+  }
+  .hero-bg-video {
+    min-height: 200px;
+    object-position: center 40%; /* Tweak 40% up/down to get steak in frame */
+  }
 }
