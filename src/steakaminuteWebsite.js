@@ -64,7 +64,7 @@ const SteakaminuteWebsite = () => {
   {/* Background video */}
   <video
     className="hero-bg-video"
-    src="/hero-section.mp4"
+    src="/herosection.mp4"
     autoPlay
     loop
     muted
