@@ -76,7 +76,7 @@ const SteakaminuteWebsite = () => {
       height: "100%",
       objectFit: "cover",
       zIndex: 0,
-      opacity: 0.42,
+      opacity: 0.75,
       pointerEvents: "none"
     }}
   />
@@ -84,7 +84,7 @@ const SteakaminuteWebsite = () => {
   <div style={{
     position: "absolute",
     top: 0, left: 0, width: "100%", height: "100%",
-    background: "rgba(24,17,10,0.68)",
+    background: "rgba(24,17,10,0.33)",
     zIndex: 1
   }} />
   {/* Content */}
