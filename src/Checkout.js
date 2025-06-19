@@ -1,10 +1,54 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
+import { toast } from "react-toastify";
+import { FaCheckCircle } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
 
-// ✅ IMPORT TOASTIFY
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+// --- Custom Toast Component ---
+function OrderPlacedToast({ closeToast }) {
+  return (
+    <div
+      style={{
+        background: "#fff",
+        color: "#2D2D2D",
+        borderRadius: "18px",
+        padding: "38px 24px 28px 24px",
+        minWidth: 300,
+        maxWidth: 350,
+        boxShadow: "0 6px 32px #0001",
+        textAlign: "center",
+        position: "relative"
+      }}
+    >
+      {/* Close icon */}
+      <button
+        onClick={closeToast}
+        style={{
+          position: "absolute",
+          top: 12, right: 12,
+          background: "none",
+          border: "none",
+          fontSize: "1.5rem",
+          color: "#888",
+          cursor: "pointer",
+        }}
+        aria-label="Close"
+      >
+        <IoMdClose />
+      </button>
+
+      {/* Check icon */}
+      <FaCheckCircle size={50} color="#44d47e" style={{ marginBottom: 12 }} />
+      <h3 style={{ fontWeight: 800, margin: "12px 0 7px 0", color: "#23a858" }}>Order Placed!</h3>
+      <div style={{ fontSize: "1.1rem", color: "#333" }}>
+        We’ve received your order.<br />You’ll get an email soon.
+      </div>
+    </div>
+  );
+}
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -21,7 +65,7 @@ const Checkout = () => {
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     if (cart.length === 0) {
-      toast.error("Your cart is empty. Please add items before placing an order.", { autoClose: 2500 });
+      alert("Your cart is empty. Please add items before placing an order.");
       setIsSubmitting(false);
       return;
     }
@@ -41,11 +85,8 @@ const Checkout = () => {
       packaging,
     };
 
-    // ✅ Show toast notification immediately
-    toast.success("✅ Your order has been placed successfully! A confirmation email will follow.", { autoClose: 2600 });
-
     try {
-      await fetch("https://freshmeathouse.onrender.com/send-order", {
+      const response = await fetch("https://freshmeathouse.onrender.com/send-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,21 +94,40 @@ const Checkout = () => {
         body: JSON.stringify(orderData),
       });
 
-      localStorage.removeItem("cart");
-      setName("");
-      setEmail("");
-      setPhone("");
-      setAddress("");
-      setPackaging("vacuum-sealed");
+      // === Show the custom toast instantly ===
+      toast(<OrderPlacedToast />, {
+        autoClose: 2400,
+        position: "top-center",
+        closeButton: false,
+        hideProgressBar: true,
+        draggable: false,
+        pauseOnHover: false,
+        style: { background: "transparent", boxShadow: "none", padding: 0, minWidth: 0 },
+        onClose: () => {
+          // Redirect only after toast closes
+          setTimeout(() => {
+            navigate("/", { replace: true });
+            setIsSubmitting(false);
+          }, 100);
+        }
+      });
 
-      // ✅ Redirect after the toast auto-closes
-      setTimeout(() => {
-        navigate("/", { replace: true });
+      if (response.ok) {
+        localStorage.removeItem("cart");
+        setName("");
+        setEmail("");
+        setPhone("");
+        setAddress("");
+        setPackaging("vacuum-sealed");
+      } else {
+        const errorResult = await response.json();
+        // Show a red toast for error (optional)
+        toast.error(errorResult.message || "Failed to send order confirmation email. Please try again.");
         setIsSubmitting(false);
-      }, 2600);
-
+      }
     } catch (error) {
-      toast.error("⚠️ Something went wrong while placing your order. Please try again.", { autoClose: 2600 });
+      console.error("🚨 Error submitting order:", error);
+      toast.error("⚠️ Something went wrong while placing your order. Please check your information and try again.");
       setIsSubmitting(false);
     }
   };
@@ -223,10 +283,9 @@ const Checkout = () => {
           </div>
         </Form>
       </div>
-      {/* ✅ Toast notification container */}
-      <ToastContainer position="top-center" />
     </div>
   );
 };
 
 export default Checkout;
+
