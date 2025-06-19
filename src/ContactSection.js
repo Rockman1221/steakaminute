@@ -2,14 +2,18 @@
 
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactSection = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleContactSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const response = await fetch("https://freshmeathouse.onrender.com/contact", {
         method: "POST",
@@ -17,17 +21,27 @@ const ContactSection = () => {
         body: JSON.stringify({ name, email, message }),
       });
       if (response.ok) {
-        alert("Thank you for your message! We will get back to you soon.");
+        toast.success("Thank you for your message! We will get back to you soon.", {
+          position: "top-center",
+          autoClose: 2400,
+        });
         setName("");
         setEmail("");
         setMessage("");
       } else {
-        alert("Failed to send your message. Please try again later.");
+        toast.error("Failed to send your message. Please try again later.", {
+          position: "top-center",
+          autoClose: 3200,
+        });
       }
     } catch (error) {
       console.error("Error sending contact data:", error);
-      alert("An error occurred. Please try again later.");
+      toast.error("An error occurred. Please try again later.", {
+        position: "top-center",
+        autoClose: 3500,
+      });
     }
+    setIsSubmitting(false);
   };
 
   return (
@@ -108,18 +122,24 @@ const ContactSection = () => {
             <Button
               variant="danger"
               type="submit"
+              disabled={isSubmitting}
               style={{
                 background: "var(--logo-red, #A52A2A)",
                 border: "none",
                 fontWeight: 700,
                 padding: "10px 36px",
                 borderRadius: "8px",
+                transition: "all 0.2s",
+                opacity: isSubmitting ? 0.7 : 1,
+                pointerEvents: isSubmitting ? "none" : "auto"
               }}
             >
-              Send
+              {isSubmitting ? "Sending..." : "Send"}
             </Button>
           </div>
         </Form>
+        {/* Toast notifications will appear here */}
+        <ToastContainer />
       </Container>
     </section>
   );
